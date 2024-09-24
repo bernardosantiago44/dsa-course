@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+#include <iostream>
 using namespace std;
 
 struct MyNodoLL {
@@ -28,6 +29,11 @@ public:
     int first();
     int last();
     void insertFirst(int data);
+    void insertLast(int data);
+    void insertAt(int pos, int data);
+
+    // Eliminar
+    void print();
 
     int getAt(int pos);
 };
