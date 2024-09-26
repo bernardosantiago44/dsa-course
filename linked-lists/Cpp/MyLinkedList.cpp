@@ -76,18 +76,17 @@ void MyLinkedList::insertAt(int pos, int data) {
     }
 }
 
-void MyLinkedList::print() {
-    MyNodoLL* current = head;
-    while (current != nullptr) {
-        cout << current->data;
-        if (current->next != nullptr) {
-            cout << " -> ";
-        }
+void MyLinkedList::setAt(int pos, int data) {
+    if (pos < 0 || pos >= this->size) {
+        throw invalid_argument("La posicion en la lista es invalida.");
+    }
+
+    MyNodoLL* current = this->head;
+    for (int i = 0; i < pos; i++) { 
         current = current->next;
     }
-    cout << endl;
+    current->data = data;
 }
-
 int MyLinkedList::getAt(int pos) {
     if (pos < 0) {
         throw invalid_argument("No se puede obtener el elemento en una posición negativa.");
@@ -102,6 +101,73 @@ int MyLinkedList::getAt(int pos) {
     return current->data;
 }
 
+// O(1)
+void MyLinkedList::removeFirst() {
+    if (size == 0) {
+        throw invalid_argument("La lista está vacía.");
+    } else {
+        MyNodoLL* tmp = head;
+        this->head = head->next;
+        delete tmp;
+        this->size--;
+        if (size == 0) {
+            tail = nullptr;
+        }
+    }
+}
+
+// O(n)
+void MyLinkedList::removeLast() {
+    if (size == 0) { 
+        return; 
+    }
+    MyNodoLL* tmp = head;
+    for (int i = 1; i < this->size - 1; i++) {
+        tmp = tmp->next;
+    }
+    delete tmp->next;
+    tail = tmp;
+    tmp->next = nullptr;
+    this->size--;
+    if (size == 0) {
+        head = nullptr;
+    }
+}
+
+void MyLinkedList::removeAt(int pos) {
+    if (size == 0) { 
+        return; 
+    }
+    if (pos == 0) {
+        removeFirst();
+    } else if (pos == size - 1) {
+        removeLast();
+    } else {
+        if (pos < 0 || pos >= size) {
+            throw invalid_argument("Posicion fuera de rango de la lista.");
+        }
+        MyNodoLL* tmp = head;
+        for (int i = 1; i < pos; i++) {
+            tmp = tmp->next;
+        }
+        MyNodoLL* toDelete = tmp->next;
+        tmp->next = tmp->next->next;
+        delete toDelete;
+        this->size--;
+    }
+}
+
+ostream& operator<<(ostream& os, const MyLinkedList& ll) {
+    MyNodoLL* current = ll.head;
+    while (current != nullptr) {
+        os << current->data;
+        if (current->next != nullptr) {
+            os << " -> ";
+        }
+        current = current->next;
+    }
+    return os;
+}
 
 MyLinkedList::~MyLinkedList() {
     MyNodoLL* current = head;

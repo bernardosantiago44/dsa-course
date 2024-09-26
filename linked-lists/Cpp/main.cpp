@@ -15,10 +15,14 @@ int main() {
 
         lista.insertAt(2, 3);
         lista.insertAt(0, -7);
-        lista.print();
         lista.insertAt(7, 26);
-
         lista.print();
+        lista.removeLast();
+        lista.print();
+        lista.insertLast(5);
+        lista.print();
+        lista.removeAt(2);
+        cout << lista << endl;
         }
     } catch (invalid_argument e) {
         cout << "El programa terminó de manera inesperada: " << e.what() << endl;

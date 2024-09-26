@@ -31,9 +31,11 @@ public:
     void insertFirst(int data);
     void insertLast(int data);
     void insertAt(int pos, int data);
-
-    // Eliminar
-    void print();
+    void setAt(int pos,int data); //Exc invalid_argument
+    void removeFirst();
+    void removeLast();
+    void removeAt(int pos);
+    friend ostream& operator<<(ostream& os,const MyLinkedList& ll);
 
     int getAt(int pos);
 };
