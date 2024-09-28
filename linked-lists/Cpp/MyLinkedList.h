@@ -16,12 +16,11 @@ struct MyNodoLL {
 };
 
 class MyLinkedList {
-private:
+public:
     MyNodoLL *head,
              *tail;
     int size;
 
-public:
     MyLinkedList();
     ~MyLinkedList();
     int length();
