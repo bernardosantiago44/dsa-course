@@ -16,11 +16,11 @@ int main() {
         lista.insertAt(2, 3);
         lista.insertAt(0, -7);
         lista.insertAt(7, 26);
-        lista.print();
+        cout << lista << endl;
         lista.removeLast();
-        lista.print();
+        cout << lista << endl;
         lista.insertLast(5);
-        lista.print();
+        cout << lista << endl;
         lista.removeAt(2);
         cout << lista << endl;
         }

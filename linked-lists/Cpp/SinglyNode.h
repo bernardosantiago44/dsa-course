@@ -4,11 +4,10 @@
 using namespace std;
 
 class SinglyNode {
-private:
+public:
     int value;
     SinglyNode* next; // Pointer to next node, nil if last node
 
-public:
     SinglyNode();
     SinglyNode(int value);
     SinglyNode(int value, SinglyNode* next);

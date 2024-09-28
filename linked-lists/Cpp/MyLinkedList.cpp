@@ -162,7 +162,7 @@ ostream& operator<<(ostream& os, const MyLinkedList& ll) {
     while (current != nullptr) {
         os << current->data;
         if (current->next != nullptr) {
-            os << " -> ";
+            os << ", ";
         }
         current = current->next;
     }
