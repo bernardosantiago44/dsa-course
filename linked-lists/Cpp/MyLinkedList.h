@@ -1,3 +1,6 @@
+// Bernardo Santiago Marín
+// A01638915
+
 #pragma once
 #include <stdexcept>
 #include <iostream>

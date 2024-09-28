@@ -1,3 +1,5 @@
+// Bernardo Santiago Marín
+// A01638915
 #include "MyLinkedList.h"
 
 MyLinkedList::MyLinkedList() {
