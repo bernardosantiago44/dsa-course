@@ -4,7 +4,7 @@
       "name": "(lldb) Iniciar",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceRoot}/linked-lists/Cpp/main.exe",
+      "program": "${workspaceRoot}/Stack/Cpp/main.exe",
       "args": [
         "-std=c++11"
       ],
@@ -26,15 +26,6 @@
       "externalConsole": false,
       "MIMode": "lldb",
       "preLaunchTask": "C/C++: g++ compilar archivo activo"
-    },
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "lldb",
-      "request": "launch",
-      "args": [],
-      "cwd": "/Users/bernardo/Desktop/data-structures/dsa-course/linked-lists/Cpp",
-      "program": "/Users/bernardo/Desktop/data-structures/dsa-course/linked-lists/Cpp/main.exe",
-      "stopOnEntry": true
     }
   ],
   "version": "2.0.0"
