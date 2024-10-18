@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+
+using namespace std;
 
 struct MyNodeBST {
     int data;
@@ -11,6 +14,9 @@ struct MyNodeBST {
     }
 
     MyNodeBST(int data) : MyNodeBST(data, 0, 0) {};
+    ~MyNodeBST() {
+        cout << "deleting node with data " << data << endl;
+    }
 };
 
 class MyBST{
@@ -25,6 +31,12 @@ class MyBST{
         //otro método que haga la recursión deben de colocarlo como privado
         //sólo la función de preparación sería pública
         bool insert(int data, MyNodeBST* current);
+        bool remove(int data, MyNodeBST* current);
+        void deleteNode(MyNodeBST* node);
+
+        // Regresa el nodo anterior en orden logico
+        // (mas a la derecha del subarbol izquierdo)
+        MyNodeBST* getPreviousNode(MyNodeBST* current); 
     public:
         MyBST();
         int length();
