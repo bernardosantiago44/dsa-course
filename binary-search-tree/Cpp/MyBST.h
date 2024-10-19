@@ -31,8 +31,8 @@ class MyBST{
         //otro método que haga la recursión deben de colocarlo como privado
         //sólo la función de preparación sería pública
         bool insert(int data, MyNodeBST* current);
-        bool remove(int data, MyNodeBST* current);
-        void deleteNode(MyNodeBST* node);
+        MyNodeBST* remove(int data, MyNodeBST* current);
+        MyNodeBST* deleteNode(MyNodeBST* node);
 
         // Regresa el nodo anterior en orden logico
         // (mas a la derecha del subarbol izquierdo)

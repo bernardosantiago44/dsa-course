@@ -48,11 +48,13 @@ bool MyBST::search(int data) {
 }
 
 bool MyBST::insert(int data, MyNodeBST* current) {
-    if (data == current->data) return false; // The value was already in the tree
+    if (data == current->data) return false; // El valor ya esta en el arbol
     MyNodeBST *left, *right;
     left = current->left;
     right = current->right;
 
+    // Caso base: si el actual es una hoka,
+    // insertar el valor como una hoja
     // Base case: Current is a leaf
     if (data < current->data && left == nullptr) {
         current->left = new MyNodeBST(data);
@@ -71,7 +73,7 @@ bool MyBST::insert(int data, MyNodeBST* current) {
     }
 }
 
-// Created with help of the online tool https://www.cs.usfca.edu/~galles/visualization/BST.html
+// Con ayuda visual de: https://www.cs.usfca.edu/~galles/visualization/BST.html
 bool MyBST::insert(int data) {
     MyNodeBST* current = this->root;
     // If the tree is empty, create a root
@@ -94,23 +96,22 @@ MyNodeBST* MyBST::getPreviousNode(MyNodeBST* current) {
     return current;
 }
 
-void MyBST::deleteNode(MyNodeBST* node) {
+MyNodeBST* MyBST::deleteNode(MyNodeBST* node) {
     if (node == nullptr) return; // Precondicion redundante: El nodo NO es nulo
     
     // Si es un nodo hoja:
     if (node->left == nullptr && node->right == nullptr) {
         // MyNodeBST* temp = node;
         delete node;
-        return;
+        return nullptr;
     }
 
     // Si solamente tiene un hijo:
-        // node.left == null XOR node.right == null (pensando en Logica Booleana de IoT)
-        // Si uno es nulo, pero el otro no, tomar el valor del único 
-        // nodo siguiente y asignarlo al actual
-    if ((node->left == nullptr) ^ (node->right == nullptr)) {
+        // Preferentemente ir por el izquierdo. Si no hay,
+        // se copia el valor del derecho al actual.
+    if (node->left == nullptr) {
         MyNodeBST* temp = node;
-        MyNodeBST* next = (node->left != nullptr) ? node->left : node->right; // node.left ?? node.right!
+        MyNodeBST* next = node->right; // node.right!
         node = next;
         delete temp;
     }
@@ -121,19 +122,29 @@ void MyBST::deleteNode(MyNodeBST* node) {
     deleteNode(prev); // LLamada recursiva: el delete se hace desde el nodo hoja
 }
 
-bool MyBST::remove(int data, MyNodeBST* current) {
-    if (current == nullptr) return false;
+MyNodeBST* MyBST::remove(int data, MyNodeBST* current) {
+    // if (current == nullptr) return false;
+
+    // if (data < current->data) {
+    //     // Llamada recursiva: buscar nodo a eliminar en el sub-arbol izquierdo
+    //     return remove(data, current->left);
+    // } else if (data > current->data) {
+    //     // Buscar nodo a eliminar en el sub-arbol derecho
+    //     return remove(data, current->right);
+    // } else {
+    //     // Encontramos el nodo a eliminar
+    //     deleteNode(current);
+    //     return true;
+    // }
+
+    if (current == nullptr) return nullptr;
 
     if (data < current->data) {
         // Llamada recursiva: buscar nodo a eliminar en el sub-arbol izquierdo
-        return remove(data, current->left);
+        // Regresa el nodo del nuevo sub-arbol (el mismo si no se eliminó)
+        current->right = remove(data, current->right);
     } else if (data > current->data) {
-        // Buscar nodo a eliminar en el sub-arbol derecho
-        return remove(data, current->right);
-    } else {
-        // Encontramos el nodo a eliminar
-        deleteNode(current);
-        return true;
+        current->left = remove(data, current->left);
     }
 }
 
