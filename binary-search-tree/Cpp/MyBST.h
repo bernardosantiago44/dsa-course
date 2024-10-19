@@ -32,11 +32,13 @@ class MyBST{
         //sólo la función de preparación sería pública
         bool insert(int data, MyNodeBST* current);
         MyNodeBST* remove(int data, MyNodeBST* current);
-        MyNodeBST* deleteNode(MyNodeBST* node);
+        MyNodeBST* deleteNode(MyNodeBST* node); // Eliminar el nodo y reasignar al actual
 
         // Regresa el nodo anterior en orden logico
         // (mas a la derecha del subarbol izquierdo)
         MyNodeBST* getPreviousNode(MyNodeBST* current); 
+        int height(MyNodeBST* current);
+        void ancestors(int data, vector<int>& recorrido, MyNodeBST* current);
     public:
         MyBST();
         int length();
