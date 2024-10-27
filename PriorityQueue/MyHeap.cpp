@@ -57,58 +57,48 @@ void MyHeap::heapifyUP() {
     }
 }
 
+// Peor caso: El nodo del principio es el menor valor
+// O(log(n))
 void MyHeap::heapifyDOWN() {
     int current = 0;
-    int greatest = -1;
-    do {
-        int leftChild = this->getLeftChildIndex(current);
-        int rightChild = this->getRightChildIndex(current);
-
-        // Seleccionar el hijo más grande
-        if (rightChild != -1) {
-            greatest = rightChild;
-        } else {
-            greatest = leftChild;
+    int leftChild = this->getLeftChildIndex(current);
+    int rightChild = this->getRightChildIndex(current);
+    int greatest = this->getGreatestNode(leftChild, rightChild);
+    while (current != -1 && greatest != -1) {
+        if (this->values[current] < this->values[greatest]) {
+            swap(this->values[current], this->values[greatest]);
         }
+        current = greatest;
+        leftChild = this->getLeftChildIndex(current);
+        rightChild = this->getRightChildIndex(current);
+        greatest = this->getGreatestNode(leftChild, rightChild);
+    }
+}
 
-    } while (current != -1 && greatest != -1)
-
-    while (current < this->size) {
-        if (this->values[current] < this->values[leftChild]) {
-            swap(this->values[current], this->values[leftChild]);
-            current = leftChild
-        } else if (this->values[current] < this->values[rightChild])
+int MyHeap::getGreatestNode(int left, int right) const {
+    if (left == -1 && right == -1) {
+        return -1;
+    } else if (left == -1) {
+        return right;
+    } else if (right == -1) {
+        return left;
+    } else {
+        int valueLeft = this->values[left];
+        int valueRight = this->values[right];
+        if (valueRight > valueLeft) {
+            return right;
+        } else {
+            return left;
+        }
     }
 }
 
 void MyHeap::pop() {
-    if (this->size > 0) {
+    if (this->size > 1) {
         // Set the last element at the front
         this->values[0] = this->values[--size];
         this->heapifyDOWN();
     }
-}
-
-int MyHeap::removeElementAt(int pos) {
-    int leftChild = this->getLeftChildIndex(pos);
-    int rightChild = this->getRightChildIndex(pos);
-    
-    // Condición de paro: El nodo no tiene hijo izquierdo ni derecho
-    if (leftChild == -1 && rightChild == -1) {
-        return this->values[pos];
-    }
-
-    int valueToRemove = this->values[pos];
-    if (rightChild == -1) {
-        this->values[pos] = removeElementAt(leftChild);
-    } else if (leftChild == -1) {
-        this->values[pos] = removeElementAt(rightChild);
-    } else if (this->values[leftChild] > this->values[rightChild]) {
-        this->values[pos] = removeElementAt(leftChild);
-    } else {
-        this->values[pos] = removeElementAt(leftChild);
-    }
-    return valueToRemove;
 }
 
 // O(1)

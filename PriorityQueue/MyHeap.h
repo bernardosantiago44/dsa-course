@@ -37,7 +37,7 @@ class   MyHeap{
         int getParentIndex(int current) const;
         int getLeftChildIndex(int current) const;
         int getRightChildIndex(int current) const;
-        int removeElementAt(int index);
+        int getGreatestNode(int left, int right) const; // Regresa el índice que almacena el mayor valor.
    };
 
 #endif 
