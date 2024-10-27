@@ -14,5 +14,20 @@ int main() {
     q.push(20);
     q.imprimir();
 
+    // Test Pop method
+    q.pop();
+    q.imprimir();
+    q.pop();
+    q.imprimir();
+    q.pop();
+    q.imprimir();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.pop();
+    q.imprimir();
+    q.pop();
+
     return 0;
 }

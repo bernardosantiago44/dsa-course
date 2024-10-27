@@ -5,6 +5,11 @@ using namespace std;
 
 //Recuerden poner como comentario en cada operación la complejidad de la misma para el mejor de los casos y para el peor de los casos
 //y expliquen en cual situación se da el mejor de los casos y en cual el peor.
+
+/* Con ayuda visual de https://www.cs.usfca.edu/~galles/visualization/Heap.html.
+Nota: En la implementación, utilizan arreglos indexados en 1. En la mia,
+utilizo arreglos indexados en 0.
+*/
 class   MyHeap{
     //private:
     public: //Dejar todo público para poder revisar atributos
@@ -25,6 +30,14 @@ class   MyHeap{
         int length(); //regresa cuántos elementos están almacenando el heap. OJO: NO EL TAMAÑO
         void imprimir(); //Imprime los atributos del heap. Debe ser la implementación que se muestra abajo. No cambiar nada.
         void regrowArray(); // Duplica la capacidad del arreglo actual
+
+        void heapifyUP(); // Reordena el arreglo intercambiando el ultimo valor insertado en caso de ser neceasrio.
+        void heapifyDOWN(); // Reordena el arreglo empezando desde la base, intercambiando con sus hijos en caso de ser necesario.
+
+        int getParentIndex(int current) const;
+        int getLeftChildIndex(int current) const;
+        int getRightChildIndex(int current) const;
+        int removeElementAt(int index);
    };
 
 #endif 
