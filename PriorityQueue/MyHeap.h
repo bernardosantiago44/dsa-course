@@ -32,7 +32,7 @@ class   MyHeap{
         void regrowArray(); // Duplica la capacidad del arreglo actual
 
         void heapifyUP(); // Reordena el arreglo intercambiando el ultimo valor insertado en caso de ser neceasrio.
-        void heapifyDOWN(); // Reordena el arreglo empezando desde la base, intercambiando con sus hijos en caso de ser necesario.
+        void heapifyDOWN(int current = 0); // Reordena el arreglo empezando desde la base, intercambiando con sus hijos en caso de ser necesario.
 
         int getParentIndex(int current) const;
         int getLeftChildIndex(int current) const;

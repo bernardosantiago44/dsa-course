@@ -10,10 +10,15 @@ MyHeap::MyHeap(int* valores, int size) {
     this->values = valores;
     this->size = size;
     this->len = size;
+
+    int current = this->getParentIndex(size - 1);
+    for (int current = this->getParentIndex(size - 1); current >= 0; current--) {
+        this->heapifyDOWN(current);
+    }
 }
 
 void MyHeap::imprimir() {
-    cout << "arbol size: " << this->size << " len:" << this->len << endl;
+    cout << "arbol size: " << this->size << " len: " << this->len << endl;
     for (int i = 0; i < this->size; i++)
     {
         cout << values[i] << ",";
@@ -59,12 +64,11 @@ void MyHeap::heapifyUP() {
 
 // Peor caso: El nodo del principio es el menor valor
 // O(log(n))
-void MyHeap::heapifyDOWN() {
-    int current = 0;
-    int leftChild = this->getLeftChildIndex(current);
-    int rightChild = this->getRightChildIndex(current);
-    int greatest = this->getGreatestNode(leftChild, rightChild);
-    while (current != -1 && greatest != -1) {
+void MyHeap::heapifyDOWN(int current) {
+    int leftChild = this->getLeftChildIndex(current); // O(1)
+    int rightChild = this->getRightChildIndex(current); // O(1)
+    int greatest = this->getGreatestNode(leftChild, rightChild); // O(1)
+    while (current != -1 && greatest != -1) { // Up to O(log(n))
         if (this->values[current] < this->values[greatest]) {
             swap(this->values[current], this->values[greatest]);
         }
@@ -93,11 +97,22 @@ int MyHeap::getGreatestNode(int left, int right) const {
     }
 }
 
+bool MyHeap::isEmpty() {
+    return this->size == 0;
+}
+
+int MyHeap::top() {
+    if (this->size < 1) {
+        cerr << "The queue is empty." << endl;
+    } 
+    return this->values[0];
+}
+
 void MyHeap::pop() {
-    if (this->size > 1) {
+    if (this->size > 0) {
         // Set the last element at the front
         this->values[0] = this->values[--size];
-        this->heapifyDOWN();
+        this->heapifyDOWN(0); // Heapify hacia abajo desde la raiz
     }
 }
 
@@ -129,7 +144,7 @@ int MyHeap::getRightChildIndex(int current) const {
 // O(1)
 int MyHeap::length() {
     /* Creo que conceptualmente, y para evitar errores logicos, 
-    es mejor definir size como la capacidad máxima de la lista, y 
+    es mejor definir capacity como la capacidad máxima de la lista, y 
     length para contabilizar los elementos almacenados; o mantener
     congruencia entre los nombres de atributos y sus getters.   
     */

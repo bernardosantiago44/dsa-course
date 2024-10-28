@@ -1,33 +1,15 @@
 #include "MyHeap.h"
 
 int main() {
-    MyHeap q;
-    q.push(3);
-    q.push(4);
-    q.imprimir();
-    q.push(5);
-    q.push(6);
-    q.imprimir();
-    q.push(10);
-    q.push(11);
-    q.push(12);
-    q.push(20);
+    int valores[10] = {0, -15, 21, 12, 24, 9, 11, 32, 16};
+    MyHeap q(valores, 9);
     q.imprimir();
 
-    // Test Pop method
-    q.pop();
-    q.imprimir();
-    q.pop();
-    q.imprimir();
-    q.pop();
-    q.imprimir();
-    q.pop();
-    q.pop();
-    q.pop();
-    q.pop();
-    q.pop();
-    q.imprimir();
-    q.pop();
+    while(!q.isEmpty()) {
+        cout << q.top() << ", ";
+        q.pop();
+    }
+    cout << endl;
 
     return 0;
 }
