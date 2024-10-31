@@ -10,6 +10,8 @@ int main() {
         q.pop();
     }
     cout << endl;
+    q.top();
+    q.pop();
 
     return 0;
 }

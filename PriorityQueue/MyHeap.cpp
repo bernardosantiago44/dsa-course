@@ -17,6 +17,7 @@ MyHeap::MyHeap(int* valores, int size) {
     }
 }
 
+// O(n)
 void MyHeap::imprimir() {
     cout << "arbol size: " << this->size << " len: " << this->len << endl;
     for (int i = 0; i < this->size; i++)
@@ -26,6 +27,7 @@ void MyHeap::imprimir() {
     cout << endl;
 }
 
+// O(n)
 void MyHeap::regrowArray() {
     int* temp = this->values;
     this->values = new int[2 * len + 1];
@@ -79,6 +81,7 @@ void MyHeap::heapifyDOWN(int current) {
     }
 }
 
+// O(1) 
 int MyHeap::getGreatestNode(int left, int right) const {
     if (left == -1 && right == -1) {
         return -1;
@@ -97,23 +100,29 @@ int MyHeap::getGreatestNode(int left, int right) const {
     }
 }
 
+// O(1)
 bool MyHeap::isEmpty() {
     return this->size == 0;
 }
 
+// O(1)
 int MyHeap::top() {
     if (this->size < 1) {
-        cerr << "The queue is empty." << endl;
+        throw length_error("The queue is empty.");
     } 
     return this->values[0];
 }
 
+// O(log(n)) en el peor de los casos
 void MyHeap::pop() {
-    if (this->size > 0) {
-        // Set the last element at the front
-        this->values[0] = this->values[--size];
-        this->heapifyDOWN(0); // Heapify hacia abajo desde la raiz
+    if (this->size < 1) {
+        throw length_error("The queue is empty.");
     }
+    
+    // Set the last element at the front
+    this->values[0] = this->values[--size];
+    this->heapifyDOWN(0); // Heapify hacia abajo desde la raiz
+    
 }
 
 // O(1)
