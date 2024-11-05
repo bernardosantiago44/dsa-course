@@ -62,3 +62,9 @@ hs_err_pid*
 replay_pid*
 binary-search-tree/Cpp/main.exe.dSYM/Contents/Info.plist
 binary-search-tree/Cpp/main.exe.dSYM/Contents/Resources/Relocations/aarch64/main.exe.yml
+
+# cppdbg files
+*.dSYM
+.dSYM
+*.dSYM/
+.dSYM/
