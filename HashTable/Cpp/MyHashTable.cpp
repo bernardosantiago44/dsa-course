@@ -16,13 +16,6 @@ MyHashTable::~MyHashTable() {
     // Eliminar el array
 }
 
-void MyHashTable::deleteLL(MyLinkedList* tabla, int size) {
-    for (int i = 0; i < size; i++) {
-        MyLinkedList currentList = tabla[i];
-        delete &currentList;
-    }
-}
-
 // Redistribuye los elementos del array cuando
 // el factor de carga excede de 0.75
 void MyHashTable::rehash() {
@@ -35,7 +28,7 @@ void MyHashTable::rehash() {
 
     // Recorrer el array para reacomodar todos los elementos
     for (int i = 0; i < oldSize; i++) {
-        MyLinkedList currentList = oldTable[i];
+        const MyLinkedList& currentList = oldTable[i]; // Acceder por referencia para prevenir llamar al destructor prematuramente
         MyNodoLL* currentNode = currentList.head;
 
         while (currentNode != nullptr) {
@@ -43,8 +36,8 @@ void MyHashTable::rehash() {
             currentNode = currentNode->next;
         }
     }
-
-    this->deleteLL(oldTable, oldSize);
+    delete[] oldTable;
+    cout << endl << endl;
 }
 
 // Regresa la posición que le corresponde a la clave

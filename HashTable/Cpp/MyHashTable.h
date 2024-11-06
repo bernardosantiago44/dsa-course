@@ -12,7 +12,6 @@ class MyHashTable {
     //private:
         void rehash(); // LLamado por put cuando el factor de carga excede 0.75
         int getPos(string key);
-        void deleteLL(MyLinkedList* tabla, int size); // Elimina tofos los elementos de la lista
 
     //public:
         MyHashTable();

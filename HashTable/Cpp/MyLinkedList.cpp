@@ -112,6 +112,7 @@ void MyLinkedList::removeAt(string key) {
 
 // Time complexity: O(n) where n = size
 MyLinkedList::~MyLinkedList() {
+    cout << "Deleting list with " << this->size << " elements" << endl;
     MyNodoLL* current = head;
     while (current != nullptr) {
         MyNodoLL* toDelete = current;
