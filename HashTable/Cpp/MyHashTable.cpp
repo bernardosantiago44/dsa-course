@@ -12,8 +12,8 @@ MyHashTable::MyHashTable() {
 // eliminar el array.
 MyHashTable::~MyHashTable() {
     // Eliminar las listas enlazadas, una por una
-
-    // Eliminar el array
+    delete[] this->tabla;
+    this->tabla = nullptr;
 }
 
 // Redistribuye los elementos del array cuando
@@ -28,7 +28,9 @@ void MyHashTable::rehash() {
 
     // Recorrer el array para reacomodar todos los elementos
     for (int i = 0; i < oldSize; i++) {
-        const MyLinkedList& currentList = oldTable[i]; // Acceder por referencia para prevenir llamar al destructor prematuramente
+        // Acceder por referencia para evitar llamar al destructor prematuramente
+        // (evita dangling pointers)
+        const MyLinkedList& currentList = oldTable[i]; 
         MyNodoLL* currentNode = currentList.head;
 
         while (currentNode != nullptr) {
@@ -37,7 +39,6 @@ void MyHashTable::rehash() {
         }
     }
     delete[] oldTable;
-    cout << endl << endl;
 }
 
 // Regresa la posición que le corresponde a la clave
@@ -63,9 +64,29 @@ void MyHashTable::put(string key, int value) {
 }
 
 int MyHashTable::get(string key) {
-return 0;
+    int pos = this->getPos(key);
+
+    MyLinkedList& assignedList = this->tabla[pos]; // La Lista donde debería estar el dato
+    MyNodoLL* current = assignedList.head;
+
+    while (current != nullptr) {
+        if (current->key == key) {
+            return current->value;
+        } 
+        current = current->next;
+    }
+
+    throw out_of_range("La llave " + key + " no existe en la tabla.");
 }
 
-void remove(string key) {
-
+void MyHashTable::remove(string key) {
+    int pos = this->getPos(key);
+    
+    MyLinkedList& assignedList = this->tabla[pos];
+    
+    bool removed = assignedList.removeAt(key);
+    if (!removed) {
+        throw out_of_range("La llave " + key + " no existe en la tabla.");
+    }
+    this->size--;
 }

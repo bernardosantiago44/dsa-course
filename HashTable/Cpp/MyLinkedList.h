@@ -34,7 +34,7 @@ public:
     int getAt(string key);
     void removeFirst();
     void removeLast();
-    void removeAt(string key);
+    bool removeAt(string key); // Regresa si la eliminación fue exitosa
     friend ostream& operator<<(ostream& os,const MyLinkedList& ll) {
         MyNodoLL* current = ll.head;
         for (int i = 0; i < ll.size; i++) {

@@ -35,4 +35,30 @@ int main() {
     table.put("Nuria", 24);
     table.put("Iván", 36);
     table.put("Andrea", 23);
+
+    // Test get
+    try {
+        cout << "Andrea: " << table.get("Andrea") << endl;
+        cout << "Luis: " << table.get("Luis") << endl;
+        cout << "Daniel: " << table.get("Daniel") << endl;
+        cout << "Clara: " << table.get("Clara") << endl;
+        cout << "Diego: " << table.get("Diego") << endl;
+        cout << "Bernardo: " << table.get("Bernardo") << endl;
+    } catch (out_of_range e) {
+        cout << e.what() << endl;
+    }
+
+    try {
+        cout << "Jorge: " << table.get("Jorge") << endl;
+        table.remove("Jorge");
+        cout << "Jorge: " << table.get("Jorge") << endl;
+        table.remove("Luis");
+        table.remove("Daniel");
+        table.remove("Clara");
+        table.remove("Diego");
+        table.remove("Bernardo");
+    } catch (out_of_range e) {
+        cout << e.what() << endl;
+    }
+    table.put("Jorge", 23);
 }

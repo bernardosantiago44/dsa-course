@@ -79,40 +79,42 @@ void MyLinkedList::removeLast() {
 }
 
 // Time complexity: O(n) where n = pos
-void MyLinkedList::removeAt(string key) {
-    // Precondition: size > 0
-    if (size == 0) { 
-        return; 
+bool MyLinkedList::removeAt(string key) {
+    if (this->size == 0) { 
+        return false; // La lista está vacía 
     }
 
-    // List is not empty, continue execution
-    // Assert 0 <= pos < size
-    MyNodoLL* tmp = head;
-    while (tmp->next != nullptr && tmp->next->key != key) { // Stop at one element before the target
-        tmp = tmp->next;
+    MyNodoLL* previous = nullptr;
+    MyNodoLL* current = this->head; 
+    while (current->key != key) {
+        previous = current;
+        current = current->next;
     }
-    MyNodoLL* toDelete = tmp->next;
-    tmp->next = tmp->next->next;
-    delete toDelete;
-    this->size--;
     
-}
+    if (current == nullptr) {
+        // No se encontró el nodo a eliminar.
+        return false;
+    } else if (current == this->head) {
+        this->head = current->next;
+    }
+    else if (current == this->tail) {
+        // Si el nodo a eliminar es tail, 
+        // reasignamos tail y desenlazamos el anterior.
+        this->tail = previous;
+        previous->next = nullptr;
+    } else {
+        // Si el nodo a eliminar está en medio, solo 
+        // queda desenlazar y eliminar.
+        previous->next = current->next;
+    }
 
-// ostream& operator<<(ostream& os, const MyLinkedList& ll) {
-//     MyNodoLL* current = ll.head;
-//     while (current != nullptr) {
-//         os << current->data;
-//         if (current->next != nullptr) {
-//             os << ", ";
-//         }
-//         current = current->next;
-//     }
-//     return os;
-// }
+    delete current;
+    this->size--;
+    return true;
+}
 
 // Time complexity: O(n) where n = size
 MyLinkedList::~MyLinkedList() {
-    cout << "Deleting list with " << this->size << " elements" << endl;
     MyNodoLL* current = head;
     while (current != nullptr) {
         MyNodoLL* toDelete = current;
