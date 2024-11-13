@@ -1,14 +1,17 @@
 #pragma once
+#include <iostream>
 #include <vector>
 
 using namespace std;
 
 class MyGraph {
+    public:
+        MyGraph(vector<vector<int>>& matrix);
+        void print();
     private:
-        vector<vector<int>> matriz;
+        vector<vector<int>> matrix;
 
-        MyGraph(vector<vector<int>>& matriz);
-        void loadGraph(vector<vector<int>>& matriz);
+        void loadGraph(vector<vector<int>>& matrix);
         void DFS();
         void BFS();
 };
