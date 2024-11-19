@@ -16,7 +16,14 @@ void MyGraph::loadGraph(vector<vector<int>>& matrix) {
     }
 }
 
+void MyGraph::resetVisited() {
+    for (int i = 0; i < this->visited.size(); i++) {
+        this->visited[i] = false;
+    }
+}
+
 void MyGraph::DFS() {
+    this->resetVisited();
     // Inicia el DFS desde el nodo en [0, 0].
     for (int i = 0; i < this->matrix.size(); i++) {
         if (!this->visited[i]) {
@@ -40,7 +47,28 @@ void MyGraph::DFS(int node) {
 }
 
 void MyGraph::BFS() {
+    this->resetVisited();
 
+    int start = this->matrix[0][0]; // Empezamos con el nodo 0
+    queue<int> q;
+    this->visited[0] = true;
+    cout << 0 << ",";
+    q.push(0);
+
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+        // Recorrer los nodos adyacentes a current
+        for (int i = 0; i < this->matrix[current].size(); i++) {
+            int currentAdy = this->matrix[current][i];
+            if (currentAdy == 1 && this->visited[i] == false) {
+                this->visited[i] = true;
+                cout << i << ",";
+                q.push(i);
+            }
+        }
+    }
+    cout << endl;
 }
 
 void MyGraph::print() {
@@ -51,3 +79,39 @@ void MyGraph::print() {
         cout << endl;
     }
 }
+
+/* ------------- Ejemplo de main comentado -------------
+#include "MyGraph.h"
+
+using namespace std;
+
+int main()
+{
+    vector<vector<int>> adj_matrix = {
+        {0, 0, 1, 1, 0, 0, 0, 0},
+        {0, 0, 1, 0, 0, 0, 0, 0},
+        {1, 1, 0, 0, 0, 1, 1, 0},
+        {1, 0, 0, 0, 0, 1, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1},
+        {0, 0, 1, 1, 0, 0, 0, 1},
+        {0, 0, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0}};
+
+    vector<vector<int>> matrix2 = {
+        {0, 0, 1, 1, 0},
+        {0, 0, 1, 0, 0},
+        {1, 1, 0, 0, 0},
+        {1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}};
+    
+    MyGraph graph(adj_matrix);
+    graph.DFS();
+    graph.BFS();
+
+    graph.loadGraph(matrix2);
+    graph.DFS();
+    graph.BFS();
+    return 0;
+}
+
+*/
