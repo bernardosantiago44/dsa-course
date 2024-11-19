@@ -2,9 +2,9 @@
   "configurations": [
     {
       "name": "(lldb) Iniciar",
-      "type": "cppdbg",
+      "type": "lldb",
       "request": "launch",
-      "program": "${workspaceRoot}/Stack/Cpp/main.exe",
+      "program": "${workspaceRoot}/Graphs/Cpp/main.exe",
       "args": [
         "-std=c++11"
       ],
@@ -26,6 +26,14 @@
       "externalConsole": false,
       "MIMode": "lldb",
       "preLaunchTask": "C/C++: g++ compilar archivo activo"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/home/user/tc1031/dsa-course/Graphs/Cpp",
+      "program": "/home/user/tc1031/dsa-course/Graphs/Cpp/build/Debug/outDebug"
     }
   ],
   "version": "2.0.0"

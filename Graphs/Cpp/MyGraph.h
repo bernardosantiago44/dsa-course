@@ -8,10 +8,12 @@ class MyGraph {
     public:
         MyGraph(vector<vector<int>>& matrix);
         void print();
+        void DFS();
     private:
         vector<vector<int>> matrix;
+        vector<bool> visited = {};
 
         void loadGraph(vector<vector<int>>& matrix);
-        void DFS();
+        void DFS(int node);
         void BFS();
 };
