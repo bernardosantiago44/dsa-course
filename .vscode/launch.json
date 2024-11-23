@@ -4,7 +4,7 @@
       "name": "(lldb) Iniciar",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceRoot}/Graphs/Cpp/main.exe",
+      "program": "${workspaceRoot}/linked-lists/leetcode/main.exe",
       "args": [
         "-std=c++11"
       ],
