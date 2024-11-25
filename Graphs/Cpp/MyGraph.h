@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <stack>
 using namespace std;
 
 class MyGraph {
@@ -10,6 +11,10 @@ class MyGraph {
         void print();
         void DFS();
         void BFS();
+
+        bool isTree();
+        void topologicalSort();
+        bool bipartiteGraph();
     // private:
         vector<vector<int>> matrix;
         vector<bool> visited = {};
@@ -17,4 +22,8 @@ class MyGraph {
         void resetVisited();
         void loadGraph(vector<vector<int>>& matrix);
         void DFS(int node);
+
+        void topologicalSort(int node, stack<int> &visitStack);
+        
+        bool isTree(int node, int &edgeCount);
 };
